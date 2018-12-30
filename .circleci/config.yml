@@ -8,12 +8,12 @@ jobs:
       - checkout
       - run:
           name: Build artifacts
+          working_directory: artifacts
           command: |
             version="$(git describe --tags)"
-            tar -czvf artifacts/module.tgz -C terraform .
+            tar -czvf module.tgz -C ../terraform .
       - run:
           name: Checksum artifacts
-          working_directory: artifacts
           command: sha256sum --binary --tag * | tee checksums.txt
       - store_artifacts:
           path: artifacts
