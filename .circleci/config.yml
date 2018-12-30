@@ -1,5 +1,15 @@
 version: 2.1
 jobs:
+  check:
+    docker:
+    - image: hashicorp/terraform:0.11.11
+    working_directory: /go/src/github.com/joshdk/terraform-gke-kubeconfig
+    steps:
+    - checkout
+    - run:
+        name: Check formatting
+        command: terraform fmt -list -check module
+
   build:
     docker:
     - image: circleci/golang:1.11.1
@@ -11,7 +21,7 @@ jobs:
         working_directory: artifacts
         command: |
           version="$(git describe --tags)"
-          tar -czvf module.tgz -C ../terraform .
+          tar -czvf module.tgz -C ../module .
     - run:
         name: Checksum artifacts
         working_directory: artifacts
@@ -28,4 +38,5 @@ workflows:
   version: 2
   build:
     jobs:
+    - check
     - build
