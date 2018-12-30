@@ -1,0 +1,30 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.11.1
+    working_directory: /go/src/github.com/joshdk/terraform-gke-kubeconfig
+    steps:
+      - checkout
+      - run:
+          name: Build artifacts
+          command: |
+            version="$(git describe --tags)"
+            tar -czvf artifacts/module.tgz -C terraform .
+      - run:
+          name: Checksum artifacts
+          working_directory: artifacts
+          command: sha256sum --binary --tag * | tee checksums.txt
+      - store_artifacts:
+          path: artifacts
+          destination: /artifacts
+      - persist_to_workspace:
+          root: .
+          paths:
+            - artifacts
+
+workflows:
+  version: 2
+  build:
+    jobs:
+    - build
