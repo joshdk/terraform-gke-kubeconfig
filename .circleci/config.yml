@@ -7,8 +7,18 @@ jobs:
     steps:
     - checkout
     - run:
+        name: Install tools
+        working_directory: /tmp
+        command: |
+          apk add --no-cache make
+          wget -q https://github.com/segmentio/terraform-docs/releases/download/v0.6.0/terraform-docs-v0.6.0-linux-amd64
+          install terraform-docs-v0.6.0-linux-amd64 /usr/bin/terraform-docs
+    - run:
         name: Check formatting
         command: terraform fmt -list -check module
+    - run:
+        name: Check that docs are up to date
+        command: make docs-check
 
   build:
     docker:
