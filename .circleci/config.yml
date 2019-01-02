@@ -37,9 +37,37 @@ jobs:
         paths:
         - artifacts
 
+  release:
+    docker:
+    - image: cibuilds/github:0.12.0
+    working_directory: /go/src/github.com/joshdk/terraform-gke-kubeconfig
+    steps:
+    - attach_workspace:
+        at: .
+    - run:
+        name: Upload artifacts
+        command: ghr -u joshdk -r terraform-gke-kubeconfig -replace ${CIRCLE_TAG} artifacts
+
 workflows:
   version: 2
   build:
     jobs:
     - check
     - build
+
+  release:
+    jobs:
+    - build:
+        filters:
+          branches:
+            ignore: /.*/
+          tags:
+            only: /.*/
+    - release:
+        requires:
+          - build
+        filters:
+          branches:
+            ignore: /.*/
+          tags:
+            only: /.*/
