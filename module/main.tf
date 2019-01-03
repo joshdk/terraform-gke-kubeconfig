@@ -30,7 +30,7 @@ data "template_file" "kubeconfig" {
   vars {
     cluster_ca_certificate = "${data.google_container_cluster.cluster.master_auth.0.cluster_ca_certificate}"
     endpoint               = "${data.google_container_cluster.cluster.endpoint}"
-    location               = "${coalesce(var.zone, var.region)}"
+    location               = "${coalesce(var.region, var.zone)}"
     name                   = "${data.google_container_cluster.cluster.name}"
     project                = "${data.google_container_cluster.cluster.project}"
   }
