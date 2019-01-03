@@ -1,3 +1,8 @@
+variable "kubeconfig" {
+  type        = "string"
+  description = " The path of the Kubernetes client config file to create."
+}
+
 variable "name" {
   type        = "string"
   description = "The name of the cluster."
