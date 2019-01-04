@@ -1,6 +1,6 @@
 variable "kubeconfig" {
   type        = "string"
-  description = " The path of the Kubernetes client config file to create."
+  description = "The path of the Kubernetes client config file to create."
 }
 
 variable "name" {
