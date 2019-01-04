@@ -36,6 +36,14 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
+### gcloud\_path
+
+Description: The path of the gcloud executable.
+
+Type: `string`
+
+Default: `"gcloud"`
+
 ### region
 
 Description: The region this cluster has been created in.
