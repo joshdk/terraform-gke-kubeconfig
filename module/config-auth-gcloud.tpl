@@ -1,3 +1,4 @@
+    user:
       auth-provider:
         config:
           cmd-args: config config-helper --format=json

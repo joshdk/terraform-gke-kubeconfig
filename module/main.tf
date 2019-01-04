@@ -49,8 +49,8 @@ data "template_file" "kubeconfig" {
     name                   = "${data.google_container_cluster.cluster.name}"
     project                = "${data.google_container_cluster.cluster.project}"
 
-    gcloud_auth       = "${data.template_file.kubeconfig-auth-gcloud.rendered}"
-    password_auth     = "${data.template_file.kubeconfig-auth-password.rendered}"
+    gcloud_auth       = "${trimspace(data.template_file.kubeconfig-auth-gcloud.rendered)}"
+    password_auth     = "${trimspace(data.template_file.kubeconfig-auth-password.rendered)}"
     use_password_auth = "${var.use_password_auth}"
   }
 }

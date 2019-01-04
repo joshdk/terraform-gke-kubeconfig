@@ -18,5 +18,4 @@ clusters:
 
 users:
   - name: gke_${project}_${location}_${name}
-    user:
-${use_password_auth ? password_auth : gcloud_auth}
+    ${use_password_auth ? password_auth : gcloud_auth}
