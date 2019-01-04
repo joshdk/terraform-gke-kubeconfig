@@ -19,10 +19,4 @@ clusters:
 users:
   - name: gke_${project}_${location}_${name}
     user:
-      auth-provider:
-        config:
-          cmd-args: config config-helper --format=json
-          cmd-path: gcloud
-          expiry-key: '{.credential.token_expiry}'
-          token-key: '{.credential.access_token}'
-        name: gcp
+${use_password_auth ? password_auth : gcloud_auth}
