@@ -23,3 +23,20 @@ data "google_container_cluster" "cluster" {
   region = "${var.region}"
   zone   = "${var.zone}"
 }
+
+data "template_file" "kubeconfig" {
+  template = "${file("${path.module}/config.tpl")}"
+
+  vars {
+    cluster_ca_certificate = "${data.google_container_cluster.cluster.master_auth.0.cluster_ca_certificate}"
+    endpoint               = "${data.google_container_cluster.cluster.endpoint}"
+    location               = "${coalesce(var.region, var.zone)}"
+    name                   = "${data.google_container_cluster.cluster.name}"
+    project                = "${data.google_container_cluster.cluster.project}"
+  }
+}
+
+resource "local_file" "kubeconfig" {
+  content  = "${data.template_file.kubeconfig.rendered}"
+  filename = "${var.kubeconfig}"
+}

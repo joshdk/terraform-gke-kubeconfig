@@ -20,6 +20,12 @@ module "kubeconfig" {
 
 The following input variables are required:
 
+### kubeconfig
+
+Description: The path of the Kubernetes client config file to create.
+
+Type: `string`
+
 ### name
 
 Description: The name of the cluster.
