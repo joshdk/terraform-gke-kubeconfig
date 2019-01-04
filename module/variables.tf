@@ -14,6 +14,12 @@ variable "region" {
   description = "The region this cluster has been created in."
 }
 
+variable "use_password_auth" {
+  type        = "string"
+  default     = false
+  description = "If password auth should be used instead of gcloud."
+}
+
 variable "zone" {
   type        = "string"
   default     = ""

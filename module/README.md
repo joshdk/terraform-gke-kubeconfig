@@ -44,6 +44,14 @@ Type: `string`
 
 Default: `""`
 
+### use\_password\_auth
+
+Description: If password auth should be used instead of gcloud.
+
+Type: `string`
+
+Default: `"false"`
+
 ### zone
 
 Description: The zone this cluster has been created in.
