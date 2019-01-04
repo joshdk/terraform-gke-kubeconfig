@@ -27,7 +27,9 @@ data "google_container_cluster" "cluster" {
 data "template_file" "kubeconfig-auth-gcloud" {
   template = "${file("${path.module}/config-auth-gcloud.tpl")}"
 
-  vars {}
+  vars {
+    gcloud_path = "${var.gcloud_path}"
+  }
 }
 
 data "template_file" "kubeconfig-auth-password" {

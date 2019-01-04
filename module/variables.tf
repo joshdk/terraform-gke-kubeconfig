@@ -1,3 +1,9 @@
+variable "gcloud_path" {
+  type        = "string"
+  default     = "gcloud"
+  description = "The path of the gcloud executable."
+}
+
 variable "kubeconfig" {
   type        = "string"
   description = "The path of the Kubernetes client config file to create."
