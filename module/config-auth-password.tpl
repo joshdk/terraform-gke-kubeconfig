@@ -1,3 +1,3 @@
-    user:
-      password: ${password}
-      username: ${username}
+  user:
+    password: ${password}
+    username: ${username}
