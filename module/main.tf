@@ -12,8 +12,12 @@
  *
  * module "kubeconfig" {
  *   source = "github.com/joshdk/terraform-gke-kubeconfig//module"
- *   name   = "my-cluster"
- *   zone   = "us-east1-a"
+ *
+ *   gcloud_path       = "/usr/bin/gcloud"
+ *   kubeconfig        = "/tmp/config.yml"
+ *   name              = "my-cluster"
+ *   use_password_auth = false
+ *   zone              = "us-east1-a"
  * }
  * ```
  */
