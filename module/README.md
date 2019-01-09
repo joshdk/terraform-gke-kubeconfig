@@ -72,3 +72,23 @@ Type: `string`
 
 Default: `""`
 
+## Outputs
+
+The following outputs are exported:
+
+### context
+
+Description: The name of the current Kube config context.
+
+### endpoint
+
+Description: The endpoint of the Kube API server.
+
+### kubeconfig
+
+Description: The path of the created Kubernetes client config.
+
+### name
+
+Description: The name of the cluster.
+
