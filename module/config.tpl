@@ -3,15 +3,15 @@ clusters:
 - cluster:
     certificate-authority-data: ${cluster_ca_certificate}
     server: https://${endpoint}
-  name: gke_${project}_${location}_${name}
+  name: gke_${suffix}
 contexts:
 - context:
-    cluster: gke_${project}_${location}_${name}
-    user: gke_${project}_${location}_${name}
-  name: gke_${project}_${location}_${name}
-current-context: gke_${project}_${location}_${name}
+    cluster: gke_${suffix}
+    user: gke_${suffix}
+  name: gke_${suffix}
+current-context: gke_${suffix}
 kind: Config
 preferences: {}
 users:
-- name: gke_${project}_${location}_${name}
+- name: gke_${suffix}
   ${use_password_auth ? password_auth : gcloud_auth}
