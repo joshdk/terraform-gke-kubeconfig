@@ -1,6 +1,6 @@
 # Terraform GKE Kubeconfig
 
-📝 Terraform module that creates a Kubeconfig for accessing GKE clusters
+📝 Terraform module that generates a Kubeconfig for accessing GKE clusters
 
 ## Usage:
 
@@ -12,10 +12,10 @@ provider "google" {
 module "kubeconfig" {
   source = "github.com/joshdk/terraform-gke-kubeconfig//module"
 
+  auth_type         = "gcloud"
   gcloud_path       = "/usr/bin/gcloud"
   kubeconfig        = "/tmp/config.yml"
   name              = "my-cluster"
-  use_password_auth = false
   zone              = "us-east1-a"
 }
 ```
