@@ -40,6 +40,14 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
+### auth\_type
+
+Description: The type of cluster auth to use. Must be one of (cert | gcloud | password).
+
+Type: `string`
+
+Default: `"gcloud"`
+
 ### gcloud\_path
 
 Description: The path of the gcloud executable.
@@ -55,14 +63,6 @@ Description: The region this cluster has been created in.
 Type: `string`
 
 Default: `""`
-
-### use\_password\_auth
-
-Description: If password auth should be used instead of gcloud.
-
-Type: `string`
-
-Default: `"false"`
 
 ### zone
 

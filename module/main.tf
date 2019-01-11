@@ -28,6 +28,15 @@ data "google_container_cluster" "cluster" {
   zone   = "${var.zone}"
 }
 
+data "template_file" "kubeconfig-auth-cert" {
+  template = "${file("${path.module}/config-auth-cert.tpl")}"
+
+  vars {
+    client_cert = "${data.google_container_cluster.cluster.master_auth.0.client_certificate}"
+    client_key  = "${data.google_container_cluster.cluster.master_auth.0.client_key}"
+  }
+}
+
 data "template_file" "kubeconfig-auth-gcloud" {
   template = "${file("${path.module}/config-auth-gcloud.tpl")}"
 
@@ -45,17 +54,22 @@ data "template_file" "kubeconfig-auth-password" {
   }
 }
 
+locals {
+  auth_types = {
+    cert     = "${data.template_file.kubeconfig-auth-cert.rendered}"
+    gcloud   = "${data.template_file.kubeconfig-auth-gcloud.rendered}"
+    password = "${data.template_file.kubeconfig-auth-password.rendered}"
+  }
+}
+
 data "template_file" "kubeconfig" {
   template = "${file("${path.module}/config.tpl")}"
 
   vars {
+    auth                   = "${trimspace(lookup(local.auth_types, var.auth_type))}"
     cluster_ca_certificate = "${data.google_container_cluster.cluster.master_auth.0.cluster_ca_certificate}"
     endpoint               = "${data.google_container_cluster.cluster.endpoint}"
     suffix                 = "${data.google_container_cluster.cluster.project}_${coalesce(var.region, var.zone)}_${data.google_container_cluster.cluster.name}"
-
-    gcloud_auth       = "${trimspace(data.template_file.kubeconfig-auth-gcloud.rendered)}"
-    password_auth     = "${trimspace(data.template_file.kubeconfig-auth-password.rendered)}"
-    use_password_auth = "${var.use_password_auth}"
   }
 }
 
