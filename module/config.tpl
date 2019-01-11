@@ -14,4 +14,4 @@ kind: Config
 preferences: {}
 users:
 - name: gke_${suffix}
-  ${use_password_auth ? password_auth : gcloud_auth}
+  ${auth}

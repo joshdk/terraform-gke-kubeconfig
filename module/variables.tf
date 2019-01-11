@@ -1,3 +1,9 @@
+variable "auth_type" {
+  type        = "string"
+  default     = "gcloud"
+  description = "The type of cluster auth to use. Must be one of (cert | gcloud | password)."
+}
+
 variable "gcloud_path" {
   type        = "string"
   default     = "gcloud"
@@ -18,12 +24,6 @@ variable "region" {
   type        = "string"
   default     = ""
   description = "The region this cluster has been created in."
-}
-
-variable "use_password_auth" {
-  type        = "string"
-  default     = false
-  description = "If password auth should be used instead of gcloud."
 }
 
 variable "zone" {
