@@ -4,7 +4,23 @@
 
 # Terraform GKE Kubeconfig
 
-📝 Terraform module that creates a Kubeconfig for accessing GKE clusters
+📝 Terraform module that generates a Kubeconfig for accessing GKE clusters
+
+## Motivations
+
+When provisioning GKE clusters, there is no direct (API) way to obtain a 
+kubeconfig, and the only way _to_ do so requires a hard external dependency on 
+the [gcloud cli](https://cloud.google.com/sdk/gcloud/reference/container/clusters/get-credentials), 
+and by extension, a working python installation.
+
+Additionally, `gcloud` provides no means of obtaining a kubeconfig that uses 
+[certificate](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#x509-client-certs)
+or [password](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#static-password-file) 
+authentication.
+
+This module streamlines this process by generating a kubeconfig file similar to
+how `gcloud` would, without needing it as a dependency. This config can then be 
+passed to other units (`kubectl`, `helm`, etc) for usage.
 
 ## Usage
 
